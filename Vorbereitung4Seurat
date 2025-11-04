@@ -1,0 +1,79 @@
+# install.packages(c("data.table","Matrix","Seurat","ggplot2","cowplot"))
+# install.packages("rmarkdown")
+
+library(data.table)
+library(Matrix)
+library(Seurat)
+library(ggplot2)
+
+
+# 1) den Matrix laden
+labeld <- "Labeled_Matrix.csv"
+dt <- fread(labeld)
+
+# name columns
+setnames(dt, names(dt)[1:3], c("gene", "cellbarcode", "value"))
+
+# 2) Datenvorverarbeitung
+dt[, gene        := trimws(as.character(gene))]
+dt[, cellbarcode := trimws(as.character(cellbarcode))]
+dt[, value       := as.numeric(value)]
+
+#remove rows with NA values
+dt <- dt[
+    !is.na(gene) & gene != "" &
+    !is.na(cellbarcode) & cellbarcode != "" &
+    !is.na(value)
+]
+
+
+# 3) erstelle ein Sparse-Matrix
+genes        <- unique(dt$gene)
+cellbarcodes <- unique(dt$cellbarcode)  
+
+i <- match(dt$gene,        genes)
+j <- match(dt$cellbarcode, cellbarcodes)
+
+
+sparse_mat <- sparseMatrix(
+  i = i, j = j, x = dt$value,
+  dims = c(length(genes), length(cellbarcodes)),
+  dimnames = list(genes, cellbarcodes)
+)
+
+# 4) erstell Seurat Objekt
+seu <- CreateSeuratObject(
+  counts = sparse_mat,
+  project = "my_sample",
+  min.cells = 3,
+  min.features = 200
+)
+
+# 5) Filtern (was für Filtern machen Sinn?)
+
+
+# 6) Einfacher Violinplot: Zelle (nFeature_RNA) vs Transkripte (nCount_RNA)
+
+
+# 7) Normalisation
+
+
+# 8) Hoch-variable Gene identifizieren
+
+
+# 9) Die 10 variabelsten Gene identifizieren
+
+
+# 10) Daten skalieren
+
+
+# 11) Dimensionsreduktion
+
+
+# 12) Dimensionalität des Datensatzes bestimmen (wie viele Dimensionen brauchwn wir?)
+
+
+
+# 13) Clusterbildung
+
+

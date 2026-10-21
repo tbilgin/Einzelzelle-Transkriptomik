@@ -1,4 +1,4 @@
-# Bioinformatik & Omics Modul 2025 (7 & 21.11.25)
+# Bioinformatik & Omics Modul
 ## single Cell Transcriptomics und Pathway Enrichment
 
 ### Lernziele
@@ -13,12 +13,12 @@
 
 ## Ablauf
 
-### 7.11: 
+### Erster Tag: 
 - Theorie von Einzelzell-Sequnenzieren (Technologien, Workflow)
 - Theorie von Hauptkomponentenanalyse und Dimensioinsreduktion in Transkriptomik
 - Praktikum in R mit einem 10X Tutorial: Single_Cell_RNA_Analysis
 
-## 21.11:
+## Zweiter Tag:
 - Theorie von Clusterbildung mit UMAP und t-SNE
 - Theorie von räumlichem Einzelzell-Sequenzieren
 - Praktikum in R mit smart-Seq Datensatz:
